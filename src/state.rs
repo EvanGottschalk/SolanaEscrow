@@ -7,3 +7,16 @@ pub struct Escrow {
     pub initializer_token_to_receive_account_pubkey: Pubkey,
     pub expected_amount: u64,
 }
+
+use solana_program::{
+    program_pack::{IsInitialized, Pack, Sealed},
+    pubkey::Pubkey,
+};
+...
+impl Sealed for Escrow {}
+
+impl IsInitialized for Escrow {
+    fn is_initialized(&self) -> bool {
+        self.is_initialized
+    }
+}
