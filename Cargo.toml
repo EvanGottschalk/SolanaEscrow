@@ -11,6 +11,7 @@ no-entrypoint = []
 [dependencies]
 solana-program = "=1.6.27"
 thiserror = "1.0.24"
+arrayref = "0.3.6"
 spl-token = {version = "3.1.1", features = ["no-entrypoint"]}
 
 [lib]
