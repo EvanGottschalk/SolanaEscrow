@@ -1,6 +1,7 @@
 use solana_program::{
-    account_info::AccountInfo,
+    account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
+    program_error::ProgramError,
     msg,
     pubkey::Pubkey,
 };
