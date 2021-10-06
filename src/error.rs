@@ -7,6 +7,8 @@ pub enum EscrowError {
     /// Invalid instruction
     #[error("Invalid Instruction")]
     InvalidInstruction,
+    /// Not Rent Exempt
+    /// 
 }
 
 /// Converts the EscrowError to a ProgramError
