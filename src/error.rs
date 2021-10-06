@@ -8,3 +8,11 @@ pub enum EscrowError {
     #[error("Invalid Instruction")]
     InvalidInstruction,
 }
+
+/// Converts the EscrowError to a ProgramError
+/// This is done so that the entrypoint returns a Result of either nothing or a ProgramError
+impl From<EscrowError> for ProgramError {
+    fn from(e: EscrowError) -> Self {
+        ProgramError::Custom(e as u32)
+    }
+}
