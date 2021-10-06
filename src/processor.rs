@@ -4,6 +4,8 @@ use solana_program::{
     program_error::ProgramError,
     msg,
     pubkey::Pubkey,
+    program_pack::{Pack, IsInitialized},
+    sysvar::{rent::Rent, Sysvar},
 };
 
 use crate::instruction::EscrowInstruction;
@@ -39,6 +41,18 @@ fn process_init_escrow(
         let token_to_receive_account = next_account_info(account_info_iter)?;
         if *token_to_receive_account.owner != spl_token::id() {
             return Err(ProgramError::IncorrectProgramId);
+        }
+        
+        let escrow_account = next_account_info(account_info_iter)?;
+        let rent = &Rent::from_account_info(next_account_info(account_info_iter)?)?;
+
+        if !rent.is_exempt(escrow_account.lamports(), escrow_account.data_len()) {
+            return Err(EscrowError::NotRentExempt.into());
+        }
+
+        let mut escrow_info = Escrow::unpack_unchecked(&escrow_account.data.borrow())?;
+        if escrow_info.is_initialized() {
+            return Err(ProgramError::AccountAlreadyInitialized);
         }
         
         Ok(())
