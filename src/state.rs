@@ -1,5 +1,10 @@
 use solana_program::pubkey::Pubkey;
 
+use solana_program::{
+    program_pack::{IsInitialized, Pack, Sealed},
+    pubkey::Pubkey,
+};
+
 pub struct Escrow {
     pub is_initialized: bool,
     pub initializer_pubkey: Pubkey,
@@ -8,11 +13,6 @@ pub struct Escrow {
     pub expected_amount: u64,
 }
 
-use solana_program::{
-    program_pack::{IsInitialized, Pack, Sealed},
-    pubkey::Pubkey,
-};
-...
 impl Sealed for Escrow {}
 
 impl IsInitialized for Escrow {
