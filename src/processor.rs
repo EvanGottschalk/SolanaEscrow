@@ -86,5 +86,4 @@ fn process_init_escrow(
         )?;
         
         Ok(())
-    }
 }
