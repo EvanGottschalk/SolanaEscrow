@@ -47,9 +47,7 @@ impl Pack for Escrow {
             expected_amount: u64::from_le_bytes(*expected_amount),
         })
     }
-}
-
-fn pack_into_slice(&self, dst: &mut [u8]) {
+    fn pack_into_slice(&self, dst: &mut[u8]) {
         let dst = array_mut_ref![dst, 0, Escrow::LEN];
         let (
             is_initialized_dst,
@@ -66,7 +64,8 @@ fn pack_into_slice(&self, dst: &mut [u8]) {
             initializer_token_to_receive_account_pubkey,
             expected_amount,
         } = self;
-
+        
+        //changed from is_initialized_dst[0] = *is_initialized as u8; due to error E0614
         is_initialized_dst[0] = *is_initialized as u8;
         initializer_pubkey_dst.copy_from_slice(initializer_pubkey.as_ref());
         temp_token_account_pubkey_dst.copy_from_slice(temp_token_account_pubkey.as_ref());

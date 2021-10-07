@@ -23,9 +23,8 @@ impl Processor {
             }
         }
     }
-}
 
-fn process_init_escrow(
+    fn process_init_escrow(
         accounts: &[AccountInfo],
         amount: u64,
         program_id: &Pubkey,
@@ -86,4 +85,5 @@ fn process_init_escrow(
         )?;
         
         Ok(())
+    }
 }

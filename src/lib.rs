@@ -1,8 +1,6 @@
+#[cfg(not(feature = "no-entrypoint"))]
 pub mod entrypoint;
-pub mod instructions;
-pub mod lib;
+pub mod error;
+pub mod instruction;
 pub mod processor;
 pub mod state;
-
-#[cfg(not(feature = "no-entrypoint"))]
-mod entrypoint;
